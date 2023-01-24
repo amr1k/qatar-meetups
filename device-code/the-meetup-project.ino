@@ -8,7 +8,7 @@
 #include <ESP8266WiFiMulti.h>
 
 //GLOBAL VARS
-#define URL "http://34.107.148.89:8080/senddata"
+#define URL "<replace-me>" //the endpoint is senddata
 #define SSID "<replace-me>"
 #define PSK "<replace-me>"
 //This is the key used to authenticate with the backend
