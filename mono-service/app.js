@@ -12,6 +12,7 @@
  *   4. DBPORT            |-> The port to connect to DB - default 5432 for postgres
  *   5. DBTABLE           |-> DB Table to connect to
  *   6. DBUSER            |-> DB user
+ *   7. DB                |-> Name of the DB
  *
  * You may use the following as the template of envrionment variables
  *   1. export PORT=<replace-me>              #8080
@@ -20,6 +21,7 @@
  *   4. export DBPORT=5432
  *   5. export DBTABLE=<replace-me>
  *   6. export DBUSER=<replace-me>
+ *.  7. export DB=<replace-me>
  *
  */
 
@@ -38,7 +40,7 @@ ENVVARS.DBPASSWORDSECRET = process.env.DBPASSWORDSECRET;
 ENVVARS.DBPORT = process.env.DBPORT;
 ENVVARS.DBTABLE = process.env.DBTABLE;
 ENVVARS.DBUSER = process.env.DBUSER;
-
+ENVVARS.DB = process.env.DB;
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -50,7 +52,7 @@ const connectDb = async () => {
   pool = new Pool({
     user: ENVVARS.DBUSER,
     host: ENVVARS.DBHOST,
-    database: ENVVARS.DBTABLE,
+    database: ENVVARS.DB,
     password: ENVVARS.DBPASSWORDSECRET,
     port: ENVVARS.DBPORT,
   });
@@ -120,7 +122,7 @@ app.get("/", async (request, response) => {
   message.status = "success";
 
   const temp = await runQuery(`
-    select  * from dht_data ORDER BY created_at DESC LIMIT 1;
+    select  * from ${ENVVARS.DBTABLE} ORDER BY created_at DESC LIMIT 1;
     `);
   if (temp == null) {
     response.status(500).json("Error");
