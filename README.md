@@ -65,4 +65,6 @@ After you set up the Arduino IDE, it is time to set up your free Google Cloud Pl
 
 In order to create you GCP free tier account, navigate to the following page (http://bit.ly/3Daf1ZE) and click on the **Get started for free** button. Follow the instructions to get your account set up. You might need to provide some credit card details. This is just for validation purposes; you credit card will not be charged during the signing up process. One you complete this process, you will be redirected to the Google Cloud console where you can start deploying the necessary resources to complete this project.
 
-
+```
+Note: You are responsible for monitoring/managing the Cloud costs, please be mindful.
+```
