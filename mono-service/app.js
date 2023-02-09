@@ -6,41 +6,37 @@
  *   3. If the Key matches proceed to send a pubsub message to defined topic
  *
  * Required Env variables:
- *   1. PORT              |-> The port used for http service
- *   2. DBHOST            |-> The IP of the postgres host
- *   3. DBPASSWORDSECRET  |-> The password for the DB user
- *   4. DBPORT            |-> The port to connect to DB - default 5432 for postgres
- *   5. DBTABLE           |-> DB Table to connect to
- *   6. DBUSER            |-> DB user
- *   7. DB                |-> Name of the DB
+ *   1. PORT        - Port to listen on (http)
+ *   2. PROJECTID   - GCP project id
+ *   3. SECRETNAME  - API key used to post data
  *
- * You may use the following as the template of envrionment variables
- *   1. export PORT=<replace-me>              #8080
- *   2. export DBHOST=<replace-me>
- *   3. export DBPASSWORDSECRET=<replace-me>
- *   4. export DBPORT=5432
- *   5. export DBTABLE=<replace-me>
- *   6. export DBUSER=<replace-me>
- *.  7. export DB=<replace-me>
+ *   1. export PORT=8080
+ *   2. export SECRETNAME=thisisthesecurekey
+ *   3. export PROJECTID=amriksingh-singh
+ *   4. export DBHOST=10.83.16.8
+ *   5. export DBPASSWORDSECRET=G00gle1!
+ *   6. export DBPORT=5432
+ *   7. export DBTABLE=dht
+ *   8. export DBUSER=postgres
  *
  */
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
-const { Pool } = require("pg");
-var pool;
 
 const app = express();
 const ENVVARS = {};
 
 ENVVARS.PORT = process.env.PORT;
+ENVVARS.SECRETNAME = process.env.SECRETNAME;
+ENVVARS.PROJECTID = process.env.PROJECTID;
+
 ENVVARS.DBHOST = process.env.DBHOST;
 ENVVARS.DBPASSWORDSECRET = process.env.DBPASSWORDSECRET;
 ENVVARS.DBPORT = process.env.DBPORT;
 ENVVARS.DBTABLE = process.env.DBTABLE;
 ENVVARS.DBUSER = process.env.DBUSER;
-ENVVARS.DB = process.env.DB;
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -48,11 +44,14 @@ app.use(
   })
 );
 
+const { Pool } = require("pg");
+var pool;
+
 const connectDb = async () => {
   pool = new Pool({
     user: ENVVARS.DBUSER,
     host: ENVVARS.DBHOST,
-    database: ENVVARS.DB,
+    database: ENVVARS.DBTABLE,
     password: ENVVARS.DBPASSWORDSECRET,
     port: ENVVARS.DBPORT,
   });
@@ -86,6 +85,11 @@ const server = app.listen(ENVVARS.PORT, () => {
 });
 
 app.post("/senddata", async (request, response) => {
+  if(req.headers.key!=ENVVARS.SECRETNAME){
+	console.log("Error: Incorrect Key");
+	response.status(500).json("Auth Error");
+	return;
+  }
   const message = {};
   console.log(request.body);
   message.status = "success";
@@ -103,12 +107,12 @@ app.post("/senddata", async (request, response) => {
 
   //console.log(`${JSON.stringify(data)}`);
   const query = `
-  INSERT INTO public.${ENVVARS.DBTABLE}(device_type, device_name, temperature, humidity) 
+  INSERT INTO public.dht_data(device_type, device_name, temperature, humidity)
   VALUES ('${request.body.devicetype}', '${request.body.devicename}', ${request.body.temperature}, ${request.body.humidity});`;
   //console.log(query);
   const q = await runQuery(query);
   if (q == null) {
-    response.status(404).json("Error");
+    response.status(500).json("Error");
     return;
   }
   console.log(q);
@@ -122,7 +126,7 @@ app.get("/", async (request, response) => {
   message.status = "success";
 
   const temp = await runQuery(`
-    select  * from ${ENVVARS.DBTABLE} ORDER BY created_at DESC LIMIT 1;
+    select  * from dht_data ORDER BY created_at DESC LIMIT 1;
     `);
   if (temp == null) {
     response.status(500).json("Error");
@@ -162,7 +166,7 @@ app.get("/", async (request, response) => {
     </html>
     `);
   else
-    response.status(404).send(`
+    response.status(500).send(`
     <html>
     <title>DHT Dashboard</title>
     <head>
@@ -192,7 +196,7 @@ app.get("/", async (request, response) => {
 });
 
 function main() {
-  console.log("connecting to db before starting the http service");
+  console.log("connecting to db.");
   connectDb();
 }
 if (require.main === module) {
