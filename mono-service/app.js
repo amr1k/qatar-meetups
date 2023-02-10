@@ -85,7 +85,7 @@ const server = app.listen(ENVVARS.PORT, () => {
 });
 
 app.post("/senddata", async (request, response) => {
-  if(req.headers.key!=ENVVARS.SECRETNAME){
+  if(request.headers.key!=ENVVARS.SECRETNAME){
 	console.log("Error: Incorrect Key");
 	response.status(500).json("Auth Error");
 	return;
