@@ -1,3 +1,4 @@
+\c dht
 CREATE TABLE
   public.dht_data (
     id serial NOT NULL,
