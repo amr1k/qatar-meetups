@@ -13,8 +13,8 @@
 #define PSK "<replace-me>"
 //This is the key used to authenticate with the backend
 #define APIKEY "<replace-me>"
-#define DEVICE_TYPE "DHT11"
-#define DEVICE_NAME "meetup-demo"
+#define DEVICE_TYPE "<replace-me>"
+#define DEVICE_NAME "<replace-me>"
 #define HTTP true
 /* --------------------------------=
     Setup WiFi
@@ -70,6 +70,7 @@ void setup() {
 
   //Starting WiFi
   Serial.println("Setting up WiFi...");
+  WiFi.hostname("ESP-host");
   WiFi.mode(WIFI_STA);
   WiFiMulti.addAP(SSID, PSK);
 
@@ -77,19 +78,15 @@ void setup() {
     Serial.println(".");
   }
 
-  Serial.println(WiFi.localIP());
-
-  WiFi.setAutoReconnect(true);
-  WiFi.persistent(true);
-
   // Initialize device.
   Serial.println(F("Initialising Temperature Sensor..."));
   dht.begin();
   // Print temperature sensor details.
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
-  dht.humidity().getSensor(&sensor);
  
+  dht.humidity().getSensor(&sensor);
+
   delayMS = sensor.min_delay / 1000;
 }
 
