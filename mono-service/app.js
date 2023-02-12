@@ -14,7 +14,7 @@
  *   2. export SECRETNAME=thisisthesecurekey
  *   3. export PROJECTID=amriksingh-singh
  *   4. export DBHOST=10.83.16.8
- *   5. export DBPASSWORDSECRET=G00gle1!
+ *   5. export DBPASSWORDSECRET=google1!
  *   6. export DBPORT=5432
  *   7. export DBTABLE=dht
  *   8. export DBUSER=postgres
