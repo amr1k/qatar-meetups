@@ -2,71 +2,26 @@
 
 # Introduction
 
-This purpose of this section is to walk through the initial setup of the device and the creation of a Google Cloud account.
+The aim of this Repo is to provide a step by step guide to follow along with the Qatar Meetups project. We will start off with a simple ESP8266 device sending humidity and temperature readings to GCP where will host our backend. The GCP will envolve showcasing the industry practices around building cloud native applications.
 
-## Hardware Requirements
+In addition to the following notes, you can also refer to the meetup specific branches in this repo.
+<br><br>
+## Meetup-1
+The aim of this meetup is to provide a demo of the initial setup and distribute ESP8266 kits to the attendees. We demo'ed the working state of the application. The attendees can use the following videos as a guide to follow along and to build their own projects:
 
-The following components are included in the kit that you have received:
+### [1. Infrastructure Setup for the meetup Project](https://youtu.be/yJMihVrPxqY)
+### [2. Setting up the Postgres DB](https://youtu.be/v-vTbbonVzY)
+### [3. Creating the DB Table and setting up the Application](https://youtu.be/uRMLdAT7IVA)
+### [4. Testing the API using Postman](https://youtu.be/8JRQcDZZvic)
+### [5. Hardware Wiring (ESP8266 and DHT)](https://youtu.be/VDZM8KQe3dE)
+### [6. Arduino IDE Setup](https://youtu.be/5fGc6ESk0Uw)
+### [7. Uploading the Device Code](https://youtu.be/s6gEjlAo8oU)
+<br>
 
-Note: If you did not receive a kit you can procure the following parts:
+You can view the entire playlist [HERE](https://youtube.com/playlist?list=PL1ZZUyt8C3vI2ugIbVPrM_tpkgCLd_iCF)
 
-| Component                   | Description                                                                                                                 | Quantity |
-| --------------------------- | --------------------------------------------------------------------------------------------------------------------------- | -------- |
-| Node MCU ESP8266            | The ESP8266 is a low-cost Wi-Fi microchip, <br>with built-in TCP/IP networking software, <br>and microcontroller capability | 1        |
-| DHT11                       | Temperature and Humidity Sensor                                                                                             | 1        |
-| MicroUSB Cable              | Not Included                                                                                                                | 1        |
-| USB Power Adaptor (3.3v-5v) | Required to make the board run without being <br>connected to the laptop                                                    | 1        |
+<br><br>
+## Meetup-2
+In this meetup we will dive deeper into the application architecture to explore the various components to start introducing some of the cloud native concepts.
 
-In addition to the above a laptop/pc running MacOS, Windows or Linux is required to program the device and to interact with the Google Cloud Console.
-
-## Device Setup
-
-The ESP8266 will be programmed using the Arduino IDE, therefore in this section we will go through the following:
-
-1. Install the Arduino IDE
-2. Install the required libraries
-3. Run the blink application aka the 'Hello World'
-
-### Install the Arduino IDE
-
-The Arduino IDE can be downloaded from the following page:
-
-https://www.arduino.cc/en/software
-
-You may refer to the following documentation for step-by-step instructions:
-
-https://docs.arduino.cc/software/ide-v2/tutorials/getting-started/ide-v2-downloading-and-installing
-
-### Setting up Arduino
-
-1. Install the ESP8266 Boards:
-
-### Download the DHT Libary
-
-Tools --> Boards --> Boards Manager --> Search for ESP8266 --> Install ESP8266 Boards
-
-2. Install the DHT Adafruit libraries:
-
-   ### Download the DHT Libary
-
-   Download the DHT library, this is required to interface with DHT sensor that will be using for measuring the temperature
-
-   https://github.com/adafruit/DHT-sensor-library/archive/refs/tags/1.4.4.zip
-
-   ### Importing a .zip Library
-
-   In the menu bar, go to Sketch > Include Library > Add .ZIP Library.
-
-   You will be prompted to select the library you want to add. Navigate to the .zip file’s location and open it.
-
-   If you’re using Arduino IDE 2, you may need to restart the IDE for the library to be available.
-
-## GCP Account Creation
-
-After you set up the Arduino IDE, it is time to set up your free Google Cloud Platform Account (GCP). With the free tier account, you get access to 20+ products and $300 worth of credits valid for 90 days. This should be more than enough to get you started in the woorl of Google Cloud.
-
-In order to create you GCP free tier account, navigate to the following page (http://bit.ly/3Daf1ZE) and click on the **Get started for free** button. Follow the instructions to get your account set up. You might need to provide some credit card details. This is just for validation purposes; you credit card will not be charged during the signing up process. One you complete this process, you will be redirected to the Google Cloud console where you can start deploying the necessary resources to complete this project.
-
-```
-Note: You are responsible for monitoring/managing the Cloud costs, please be mindful.
-```
+Once the meetup has taken place we will update this repo
