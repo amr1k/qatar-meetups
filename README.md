@@ -22,6 +22,11 @@ You can view the entire playlist [HERE](https://youtube.com/playlist?list=PL1ZZU
 
 <br><br>
 ## Meetup-2
-In this meetup we will dive deeper into the application architecture to explore the various components to start introducing some of the cloud native concepts.
+In this meetup we changed the application hosting to automatically scale with demand and remove the external IP address from the VM. We also saw what happens when the application gets hit with a large number of requests with autoscaling and without autoscaling.
 
-Once the meetup has taken place we will update this repo
+### [Autoscaling the Application](https://www.youtube.com/watch?v=BoF6KHFiFIE&list=PL1ZZUyt8C3vI2ugIbVPrM_tpkgCLd_iCF&index=8)
+
+<br><br>
+## Meetup-3
+
+Once the meetup has taken place we will update this section
