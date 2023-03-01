@@ -11,10 +11,10 @@
  *   3. SECRETNAME  - API key used to post data
  *
  *   1. export PORT=8080
- *   2. export SECRETNAME=thisisthesecurekey
- *   3. export PROJECTID=amriksingh-singh
- *   4. export DBHOST=10.83.16.8
- *   5. export DBPASSWORDSECRET=db-password
+ *   2. export SECRETNAME=
+ *   3. export PROJECTID=
+ *   4. export DBHOST=
+ *   5. export DBPASSWORDSECRET=
  *   6. export DBPORT=5432
  *   7. export DBTABLE=dht
  *   8. export DBUSER=postgres
